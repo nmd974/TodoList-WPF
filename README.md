@@ -13,6 +13,7 @@ Vous devez creer une application qui gère une liste de tâches a effectuer. Vou
 - [x] Créer la classe de connexion à la BDD et les CRUD
 - [x] Créer la classe principale des tâches
 - [x] Créer l'interface utilisateur
+- [] Ajouter la modification du libellé d'une tâche
 - [] Améliorer le design
 
 
