@@ -16,6 +16,7 @@ Vous devez creer une application qui gère une liste de tâches a effectuer. Vou
 - [] Ajouter la modification du libellé d'une tâche
 - [x] Ajouter la gestion des raccourcis pour ajouter une tâche
 - [] Améliorer le design
+- [] Permettre l'ajout d'une image en background
 
 # Versions à venir
 
