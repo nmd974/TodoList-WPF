@@ -9,6 +9,7 @@
         FontFamily="Roboto"
         FontSize="24"
         Background="#919191"
+        KeyDown="Window_KeyDown"
         >
     <Window.Resources>
         <ContextMenu x:Key="contextMenu">
@@ -126,6 +127,8 @@
             <Setter Property="Height">
                 <Setter.Value>40</Setter.Value>
             </Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="Margin" Value="25"/>
         </Style>
     </Window.Resources>
@@ -137,9 +140,12 @@
             <RowDefinition Height="100*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-
-            <Label  VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Column="0" x:Name="Date"/>
-
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="700*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox Margin="0,0,25,0"  Grid.Column="0" Height="40" Text="" TextAlignment="Center" VerticalContentAlignment="Center" x:Name="Date"/>
+            </Grid>
         </Grid>
         <Grid Grid.Row="1" >
             <Grid.RowDefinitions>
@@ -172,19 +178,19 @@
 
 
         <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="600*"></ColumnDefinition>
-                <ColumnDefinition Width="200*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBlock x:Name="last_id" Visibility="Hidden"/>
-            <TextBox Grid.Column="0" Grid.Row="0" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" x:Name="addNewTask"/>
-            <Button Content="Ajouter" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddTask"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100*"></ColumnDefinition>
+                    <ColumnDefinition Width="600*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox Margin="0,0,40,0"  Grid.Column="1" Height="60" Text="" TextAlignment="Center" VerticalContentAlignment="Center" x:Name="addNewTask"/>
+
+                <Rectangle HorizontalAlignment="Right" Grid.Column="0"  Fill="White" Height="60" Stroke="White" Width="60"/>
+                <Image HorizontalAlignment="Right" Grid.Column="0" Height="60" Width="60" Source="/img/plus_icon.png"/>
+                
+            </Grid>
+
         </Grid>
-
-
-
     </Grid>
 </Window>

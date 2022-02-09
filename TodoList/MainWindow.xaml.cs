@@ -33,13 +33,13 @@ namespace TodoList
             RenderScreen(data);
         }
 
-        private void AddTask(object sender, RoutedEventArgs e)
+        private void AddTask()
         {
             SQLiteConnection db = DBConnection.DBInit();
             Task task = new Task();
             if(addNewTask.Text != "")
             {
-                task.label = addNewTask.Text;
+                task.label = addNewTask.Text.Trim();
                 task.ended = 0;
                 task.archived = 0;
                 task.id = this.lastId + 1;
@@ -53,6 +53,21 @@ namespace TodoList
 
         }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.LeftCtrl:
+                    addNewTask.Text = "            ";
+                    addNewTask.Focus();
+                    
+                    break;
+                case Key.Enter:
+                    AddTask();
+                    break;
+
+            }
+        }
         private void AddTaskInput(Task task)
         {
             TextBlock newBlock = new TextBlock();
@@ -88,14 +103,12 @@ namespace TodoList
             if (parent_element.Name == "Taches_en_cours")
             {
                 taskPressed.ContextMenu = (ContextMenu)FindResource("contextMenuEnded");
-                Taches_termines.Children.Add(taskPressed);
                 parent_element.Children.Remove(taskPressed);
                 taches_en_cours -= 1;
             }
             else
             {
                 taskPressed.ContextMenu = (ContextMenu)FindResource("contextMenu");
-                Taches_en_cours.Children.Add(taskPressed);
                 parent_element.Children.Remove(taskPressed);
                 taches_terminees -= 1;
             }
@@ -112,6 +125,7 @@ namespace TodoList
 
             if(parent_element.Name == "Taches_en_cours")
             {
+                taskPressed.ContextMenu = (ContextMenu)FindResource("contextMenuEnded");
                 parent_element.Children.Remove(taskPressed);
                 Taches_termines.Children.Add(taskPressed);
                 
@@ -120,6 +134,7 @@ namespace TodoList
             }
             else
             {
+                taskPressed.ContextMenu = (ContextMenu)FindResource("contextMenu");
                 parent_element.Children.Remove(taskPressed);
                 Taches_en_cours.Children.Add(taskPressed);
                 
@@ -131,7 +146,8 @@ namespace TodoList
         private void RenderScreen(SQLiteDataReader data)
         {
             string date = DateTime.Now.ToString("dddd dd MMMM yyyy");
-            Date.Content = date.First().ToString().ToUpper() + date.Substring(1);
+            Date.Text = date.First().ToString().ToUpper() + date.Substring(1);
+            Debug.WriteLine(data);
             if (data.HasRows)
             {
                 while (data.Read())
@@ -140,21 +156,17 @@ namespace TodoList
                     newTask.label = data.GetString(data.GetOrdinal("label"));
                     newTask.id = data.GetInt32(data.GetOrdinal("id"));
                     newTask.ended = data.GetInt32(data.GetOrdinal("ended"));
-                    Debug.WriteLine(data.GetInt32(data.GetOrdinal("ended")));
-                    //if(newTask.ended != 0)
-                    //{
-                    //    taches_en_cours += 1;
-                    //}
-                    //else
-                    //{
-                    //    Debug.WriteLine(newTask.ended);
-                    //    taches_terminees += 1;
-                    //}
+
                     AddTaskInput(newTask);
                     this.lastId = Int32.Parse(newTask.id.ToString());
                     Expander_Terminees.Header = "Tâches terminées (" + taches_en_cours + ")";
                     Expander_En_Cours.Header = "Tâches en cours (" + taches_terminees + ")";
                 }
+            }
+            else
+            {
+                Expander_Terminees.Header = "Tâches terminées (" + taches_en_cours + ")";
+                Expander_En_Cours.Header = "Tâches en cours (" + taches_terminees + ")";
             }
         }
 
@@ -190,8 +202,8 @@ namespace TodoList
 
         private void RerenderScreen()
         {
-            Expander_Terminees.Header = "Tâches terminées (" + taches_en_cours + ")";
-            Expander_En_Cours.Header = "Tâches en cours (" + taches_terminees + ")";
+            Expander_Terminees.Header = "Tâches terminées (" + taches_terminees + ")";
+            Expander_En_Cours.Header = "Tâches en cours (" + taches_en_cours + ")"; 
         }
     }
 }

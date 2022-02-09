@@ -13,8 +13,13 @@ namespace TodoList
     {
         public static SQLiteConnection DBInit()
         {
-            SQLiteConnection db = ConnectDb();
+            bool create_table = false;
             if (!File.Exists("database.db"))
+            {
+                create_table = true;
+            }
+            SQLiteConnection db = ConnectDb();
+            if (create_table)
             {
                 Task.CreateTableTask(db);
             }
