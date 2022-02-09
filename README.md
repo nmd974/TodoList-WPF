@@ -17,4 +17,7 @@ Vous devez creer une application qui gère une liste de tâches a effectuer. Vou
 - [x] Ajouter la gestion des raccourcis pour ajouter une tâche
 - [] Améliorer le design
 
+# Versions à venir
+
+- Pomodoro
 
