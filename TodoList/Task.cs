@@ -90,6 +90,18 @@ namespace TodoList
             return ExecuteWrite(db, query, args);
         }
 
+        public int UpdateLabelTask(SQLiteConnection db, Int32 id, string label)
+        {
+            const string query = "UPDATE Task SET label = @label WHERE id = @id";
+            var args = new Dictionary<string, object>
+            {
+                {"@id", id},
+                {"@label", label},
+            };
+
+            return ExecuteWrite(db, query, args);
+        }
+
         public int ReactivateTask(SQLiteConnection db, Int32 id)
         {
             const string query = "UPDATE Task SET ended = @ended WHERE id = @id";

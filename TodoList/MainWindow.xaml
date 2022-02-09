@@ -13,12 +13,38 @@
         >
     <Window.Resources>
         <ContextMenu x:Key="contextMenu">
-            <MenuItem Header="Terminer" Click="EndedTaskInput"/>
-            <MenuItem Header="Supprimer" Click="DeleteTaskInput"/>
+            <MenuItem IsCheckable="true" Header="Renommer" Click="ShowPromptUpdate">
+                <MenuItem.Icon>
+                    <Image Source="/img/update_icon.png" Width="15" Height="15" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem IsCheckable="true" Header="Terminer" Click="EndedTaskInput" Foreground="Green">
+                <MenuItem.Icon>
+                    <Image Source="/img/chek_icon.png" Width="15" Height="15" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem IsCheckable="true" Header="Supprimer" Click="DeleteTaskInput" Foreground="red">
+                <MenuItem.Icon>
+                    <Image Source="/img/delete_icon.png" Width="15" Height="15" />
+                </MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
         <ContextMenu x:Key="contextMenuEnded">
-            <MenuItem Header="Réactiver" Click="EndedTaskInput"/>
-            <MenuItem Header="Supprimer" Click="DeleteTaskInput"/>
+            <MenuItem IsCheckable="true" Header="Renommer" Click="ShowPromptUpdate">
+                <MenuItem.Icon>
+                    <Image Source="/img/update_icon.png" Width="15" Height="15" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem IsCheckable="true" Header="Réactiver" Click="EndedTaskInput" Foreground="Green">
+                <MenuItem.Icon>
+                    <Image Source="/img/chek_icon.png" Width="15" Height="15" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem IsCheckable="true" Header="Supprimer" Click="DeleteTaskInput" Foreground="red">
+                <MenuItem.Icon>
+                    <Image Source="/img/delete_icon.png" Width="15" Height="15" />
+                </MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
         <ControlTemplate x:Key = "ButtonTemplate" TargetType = "Button">
             <Grid>

@@ -47,10 +47,28 @@ namespace TodoList
                 addNewTask.Clear();
                 AddTaskInput(task);
                 this.lastId = Int32.Parse(task.id.ToString());
-                taches_en_cours += 1;
                 RerenderScreen();
             }
 
+        }
+
+        private void ShowPromptUpdate(object sender, EventArgs e)
+        {
+            string new_label = Microsoft.VisualBasic.Interaction.InputBox("Veuillez saisir le nouveau libellé de la tâche", "Modification du libellé de la tâche", this.Actual_TextBlock.Text);
+
+            if(new_label != "")
+            {
+                this.Actual_TextBlock.Text = new_label;
+                UpdateLabelTask(Int32.Parse(this.Actual_TextBlock.Uid), new_label);
+            }
+            
+        }
+
+        private void UpdateLabelTask(Int32 id, string label)
+        {
+            Task task_access = new Task();
+            SQLiteConnection db = DBConnection.DBInit();
+            task_access.UpdateLabelTask(db,id,label);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -58,7 +76,6 @@ namespace TodoList
             switch (e.Key)
             {
                 case Key.LeftCtrl:
-                    addNewTask.Text = "            ";
                     addNewTask.Focus();
                     
                     break;
@@ -74,6 +91,9 @@ namespace TodoList
             newBlock.Text = task.label;
             newBlock.Uid = task.id.ToString();
             newBlock.Style = (Style)FindResource("inputTask");
+            //newBlock.IsEnabled = false;
+            //newBlock.TextChanged += new TextChangedEventHandler(UpdateLabelTask);
+
             newBlock.MouseRightButtonDown += new MouseButtonEventHandler(SelectedInput);
             if (task.ended != 0)
             {
@@ -90,6 +110,7 @@ namespace TodoList
         }
         private void SelectedInput(object sender, MouseButtonEventArgs e)
         {
+            Debug.WriteLine("HELLO THERE?");
             this.Actual_TextBlock = (TextBlock)sender;
         }
         private void DeleteTaskInput(object sender, EventArgs e)
@@ -141,13 +162,12 @@ namespace TodoList
                 task_access.ReactivateTask(db, Int32.Parse(taskPressed.Uid));
                 AddToInProgress();
             }
-        }
+        }       
 
         private void RenderScreen(SQLiteDataReader data)
         {
             string date = DateTime.Now.ToString("dddd dd MMMM yyyy");
             Date.Text = date.First().ToString().ToUpper() + date.Substring(1);
-            Debug.WriteLine(data);
             if (data.HasRows)
             {
                 while (data.Read())
@@ -159,15 +179,10 @@ namespace TodoList
 
                     AddTaskInput(newTask);
                     this.lastId = Int32.Parse(newTask.id.ToString());
-                    Expander_Terminees.Header = "Tâches terminées (" + taches_en_cours + ")";
-                    Expander_En_Cours.Header = "Tâches en cours (" + taches_terminees + ")";
                 }
             }
-            else
-            {
-                Expander_Terminees.Header = "Tâches terminées (" + taches_en_cours + ")";
-                Expander_En_Cours.Header = "Tâches en cours (" + taches_terminees + ")";
-            }
+            Expander_Terminees.Header = "Tâches terminées (" + taches_terminees + ")";
+            Expander_En_Cours.Header = "Tâches en cours (" + taches_en_cours + ")";
         }
 
         private void AddToEnded()
