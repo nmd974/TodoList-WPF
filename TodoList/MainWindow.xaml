@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800" ResizeMode="CanResize">
+        Title="MainWindow" Height="800" Width="800" ResizeMode="CanResize"
+        FontFamily="Roboto"
+        FontSize="24"
+        Background="#919191"
+        >
     <Window.Resources>
+        <ContextMenu x:Key="contextMenu">
+            <MenuItem Header="Terminer" Click="EndedTaskInput"/>
+            <MenuItem Header="Supprimer" Click="DeleteTaskInput"/>
+        </ContextMenu>
+        <ContextMenu x:Key="contextMenuEnded">
+            <MenuItem Header="Réactiver" Click="EndedTaskInput"/>
+            <MenuItem Header="Supprimer" Click="DeleteTaskInput"/>
+        </ContextMenu>
         <ControlTemplate x:Key = "ButtonTemplate" TargetType = "Button">
             <Grid>
                 <Ellipse x:Name = "ButtonEllipse" Height = "44" Width = "44" >
@@ -99,54 +111,67 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="Roboto" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+        <Style x:Key="inputTask" TargetType="TextBlock">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint = "1,5" EndPoint="0.2,1.4">
+                        <GradientStop Offset = "0" Color = "#E2E2E2"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Height">
+                <Setter.Value>40</Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="25"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100*"></RowDefinition>
-            <RowDefinition Height="600*"></RowDefinition>
+            <RowDefinition Height="300*"></RowDefinition>
+            <RowDefinition Height="300*"></RowDefinition>
             <RowDefinition Height="100*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="600*"></ColumnDefinition>
-                <ColumnDefinition Width="200*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Label VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Column="0" Content="Mardi 11 janvier 2022"/>
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="10"/>
-                </Grid.RowDefinitions>
-                <Button Grid.Column="0" Content = "" Template = "{StaticResource ButtonTemplate}" x:Name="InProgressIndicator"/>
-                <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource underlineInProgress}"  Height="10"/>
-                <Button Grid.Column="1" Content = "" Template = "{StaticResource ButtonIsFinished}" x:Name="FinishIndicator"/>
-                <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource underlineFinished}" Visibility="Hidden" Height="10"/>
-            </Grid>
+
+            <Label  VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Column="0" x:Name="Date"/>
+
         </Grid>
-        <Grid Grid.Row="1"  x:Name="Grid_tasks">
+        <Grid Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="600*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="700*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <ScrollViewer Grid.Row="0" Grid.Column="0">
-                <StackPanel x:Name="mainContent">
-                    <TextBlock Margin="5" Text="Tac he 1" TextWrapping="Wrap" Height="40" Width="674" Background="gray" />
-                    <Button Content="Supprimer" Click="DeleteTask"/>
-                    <TextBlock Margin="5" Text="Test" Height="40" VerticalAlignment="Center" Background="Gray"/>
-                    <Ellipse Height="30" Stroke="Black" Width="36"/>
-                </StackPanel>
-            </ScrollViewer>
+            <Expander x:Name="Expander_En_Cours" IsExpanded="True">
+                <ScrollViewer Grid.Row="0" Grid.Column="0" VerticalScrollBarVisibility="Hidden" IsEnabled="True">
+                    <StackPanel x:Name="Taches_en_cours">
+                    </StackPanel>
+                </ScrollViewer>
+            </Expander>
+        </Grid>
+        <Grid Grid.Row="2"  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="600*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="700*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Expander x:Name="Expander_Terminees" IsExpanded="False">
+                <ScrollViewer Grid.Row="0" Grid.Column="0" VerticalScrollBarVisibility="Hidden" IsEnabled="True">
+                    <StackPanel x:Name="Taches_termines">
+                    </StackPanel>
+                </ScrollViewer>
+            </Expander>
         </Grid>
 
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="600*"></ColumnDefinition>
                 <ColumnDefinition Width="200*"></ColumnDefinition>
@@ -154,7 +179,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50*"></RowDefinition>
             </Grid.RowDefinitions>
-
+            <TextBlock x:Name="last_id" Visibility="Hidden"/>
             <TextBox Grid.Column="0" Grid.Row="0" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" x:Name="addNewTask"/>
             <Button Content="Ajouter" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddTask"/>
         </Grid>
