@@ -144,7 +144,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="700*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox Margin="0,0,25,0"  Grid.Column="0" Height="40" Text="" TextAlignment="Center" VerticalContentAlignment="Center" x:Name="Date"/>
+                <TextBox Margin="25"  Grid.Column="0" Height="40" Text="" TextAlignment="Center" VerticalContentAlignment="Center" x:Name="Date"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1" >
