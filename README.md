@@ -18,6 +18,9 @@ Vous devez creer une application qui gère une liste de tâches a effectuer. Vou
 - [] Améliorer le design
 - [] Permettre l'ajout d'une image en background
 
+# Rendu final de l'interface
+
+![sparkles](wireframe/rendu_final.png)
 # Versions à venir
 
 - Pomodoro
