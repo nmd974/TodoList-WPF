@@ -6,6 +6,10 @@ Vous devez creer une application qui gère une liste de tâches a effectuer. Vou
 
 ![sparkles](wireframe/wireframe_todolist.png)
 
+# Raccourcis
+
+Appuyer sur CtrlLeft pour accéder à l'input d'ajout de tâche
+Appuyer sur Entrer pour ajouter la tâche
 # Tâches
 
 - [x] Veille sur SQLite avec C#
@@ -15,6 +19,7 @@ Vous devez creer une application qui gère une liste de tâches a effectuer. Vou
 - [x] Créer l'interface utilisateur
 - [x] Ajouter la modification du libellé d'une tâche
 - [x] Ajouter la gestion des raccourcis pour ajouter une tâche
+- [] Ajouter une légende ou menu aide pour les raccourcis
 - [] Améliorer le design
 - [] Permettre l'ajout d'une image en background
 
