@@ -8,8 +8,8 @@ Vous devez creer une application qui gère une liste de tâches a effectuer. Vou
 
 # Raccourcis
 
-Appuyer sur CtrlLeft pour accéder à l'input d'ajout de tâche
-Appuyer sur Entrer pour ajouter la tâche
+- Appuyer sur CtrlLeft pour accéder à l'input d'ajout de tâche
+- Appuyer sur Entrer pour ajouter la tâche
 # Tâches
 
 - [x] Veille sur SQLite avec C#
@@ -26,6 +26,8 @@ Appuyer sur Entrer pour ajouter la tâche
 # Rendu final de l'interface
 
 ![sparkles](wireframe/rendu_final.png)
+
+![sparkles](wireframe/rendu_final_2.png)
 # Versions à venir
 
 - Pomodoro

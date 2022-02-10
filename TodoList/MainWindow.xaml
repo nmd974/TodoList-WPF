@@ -13,34 +13,34 @@
         >
     <Window.Resources>
         <ContextMenu x:Key="contextMenu">
-            <MenuItem IsCheckable="true" Header="Renommer" Click="ShowPromptUpdate">
+            <MenuItem IsCheckable="false" Header="Renommer" Click="ShowPromptUpdate">
                 <MenuItem.Icon>
                     <Image Source="/img/update_icon.png" Width="15" Height="15" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem IsCheckable="true" Header="Terminer" Click="EndedTaskInput" Foreground="Green">
+            <MenuItem IsCheckable="false" Header="Terminer" Click="EndedTaskInput" Foreground="Green">
                 <MenuItem.Icon>
                     <Image Source="/img/chek_icon.png" Width="15" Height="15" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem IsCheckable="true" Header="Supprimer" Click="DeleteTaskInput" Foreground="red">
+            <MenuItem IsCheckable="false" Header="Supprimer" Click="DeleteTaskInput" Foreground="red">
                 <MenuItem.Icon>
                     <Image Source="/img/delete_icon.png" Width="15" Height="15" />
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
         <ContextMenu x:Key="contextMenuEnded">
-            <MenuItem IsCheckable="true" Header="Renommer" Click="ShowPromptUpdate">
+            <MenuItem IsCheckable="false" Header="Renommer" Click="ShowPromptUpdate">
                 <MenuItem.Icon>
                     <Image Source="/img/update_icon.png" Width="15" Height="15" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem IsCheckable="true" Header="Réactiver" Click="EndedTaskInput" Foreground="Green">
+            <MenuItem IsCheckable="false" Header="Réactiver" Click="EndedTaskInput" Foreground="Green">
                 <MenuItem.Icon>
                     <Image Source="/img/chek_icon.png" Width="15" Height="15" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem IsCheckable="true" Header="Supprimer" Click="DeleteTaskInput" Foreground="red">
+            <MenuItem IsCheckable="false" Header="Supprimer" Click="DeleteTaskInput" Foreground="red">
                 <MenuItem.Icon>
                     <Image Source="/img/delete_icon.png" Width="15" Height="15" />
                 </MenuItem.Icon>
